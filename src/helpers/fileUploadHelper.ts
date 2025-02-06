@@ -28,10 +28,10 @@ const uploadToCloudinary = async (
     cloudinary.uploader.upload(
       file.path,
       (error: Error, result: ICloudinaryResponse) => {
-        fs.unlinkSync(file.path);
         if (error) {
           reject(error);
         } else {
+          fs.unlinkSync(file.path); // Delete only after successful upload
           resolve(result);
         }
       },
