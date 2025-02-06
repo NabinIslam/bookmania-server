@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\ARL\\Desktop\\bookmania-server\\logs\\winston\\errors\\.836b4d11a17b27cea34717bfbc27d4c67792e7de-audit.json",
+    "files": [
+        {
+            "date": 1738838898054,
+            "name": "C:\\Users\\ARL\\Desktop\\bookmania-server\\logs\\winston\\errors\\phu-2025-06-02-16-error.log",
+            "hash": "3574307c4ba37c3fec2bc0b13ae555de4c1e2361ec88ae6ed0647746947942be"
+        }
+    ],
+    "hashType": "sha256"
+}
