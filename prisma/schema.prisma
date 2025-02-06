@@ -28,13 +28,12 @@ model User {
 }
 
 model Book {
-  id              String   @id @default(uuid())
-  title           String
-  slug            String   @unique
-  description     String
-  coverImage      String
-  publicationDate DateTime
-  price           Float
+  id          String @id @default(uuid())
+  title       String
+  slug        String @unique
+  description String
+  coverImage  String
+  price       Float
 
   authorId String
   author   Author @relation(fields: [authorId], references: [id])
