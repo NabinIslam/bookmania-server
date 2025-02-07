@@ -34,6 +34,16 @@
             "date": 1738918180588,
             "name": "C:\\Users\\sinab\\Desktop\\bookmania-server\\logs\\winston\\errors\\phu-2025-07-02-14-error.log",
             "hash": "8a456166d7d9e3d19a4eff90a260ac9a3396d9aa6fd0ad0c94dba3c3e7a25c67"
+        },
+        {
+            "date": 1738952931927,
+            "name": "C:\\Users\\sinab\\Desktop\\bookmania-server\\logs\\winston\\errors\\phu-2025-08-02-00-error.log",
+            "hash": "94177ff8c7f4f6e71686ef9be922170ca53e55568ee55974957e0afc19d4238f"
+        },
+        {
+            "date": 1738954992958,
+            "name": "C:\\Users\\sinab\\Desktop\\bookmania-server\\logs\\winston\\errors\\phu-2025-08-02-01-error.log",
+            "hash": "4d1397af940156b103beb4b5aecadc81680a3a20e6efec9655c74dc2c19d4904"
         }
     ],
     "hashType": "sha256"

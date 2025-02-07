@@ -34,7 +34,6 @@ model Book {
   slug        String @unique
   description String
   coverImage  String
-  price       Float
 
   authorId String
   author   Author @relation(fields: [authorId], references: [id])

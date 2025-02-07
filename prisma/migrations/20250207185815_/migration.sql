@@ -1,45 +1,12 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Author` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Book` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Favorite` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Genre` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Book" DROP CONSTRAINT "Book_authorId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Book" DROP CONSTRAINT "Book_genreId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Favorite" DROP CONSTRAINT "Favorite_bookId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Favorite" DROP CONSTRAINT "Favorite_userId_fkey";
-
--- DropTable
-DROP TABLE "Author";
-
--- DropTable
-DROP TABLE "Book";
-
--- DropTable
-DROP TABLE "Favorite";
-
--- DropTable
-DROP TABLE "Genre";
-
--- DropTable
-DROP TABLE "User";
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT,
     "email" TEXT NOT NULL,
+    "photo" TEXT,
     "password" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -55,12 +22,10 @@ CREATE TABLE "books" (
     "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "coverImage" TEXT NOT NULL,
-    "publicationDate" TIMESTAMP(3) NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT NOT NULL,
     "genreId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "books_pkey" PRIMARY KEY ("id")
 );
@@ -69,7 +34,6 @@ CREATE TABLE "books" (
 CREATE TABLE "authors" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "bio" TEXT,
     "photo" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

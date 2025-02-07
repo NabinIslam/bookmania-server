@@ -24,7 +24,6 @@ const createBook = async (req: Request) => {
     data: {
       ...req.body,
       slug: slugify(req.body.title, { lower: true }),
-      price: parseFloat(req.body.price),
       coverImage: uploadResult?.secure_url,
     },
   });
@@ -32,10 +31,13 @@ const createBook = async (req: Request) => {
   return book;
 };
 
-const getAllBooks = async () => {
-  const books = await prisma.book.findMany();
+const getAllBooks = async (query: { genre?: string }) => {
+  const books = await prisma.book.findMany({
+    where: query.genre ? { genre: query.genre } : undefined,
+  });
 
-  if (!books) throw new ApiError(httpStatus.NOT_FOUND, 'Could not find books!');
+  if (!books.length)
+    throw new ApiError(httpStatus.NOT_FOUND, 'Could not find books!');
 
   return books;
 };
