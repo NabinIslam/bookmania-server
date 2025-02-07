@@ -22,7 +22,6 @@ const register = catchAsync(
 const login = catchAsync(async (req: Request, res: Response) => {
   const result = await authServices.login(req.body);
   const { token } = result;
-  // set refresh token into cookie
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,
