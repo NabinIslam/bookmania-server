@@ -62,14 +62,16 @@ const login = async (userLoginData: TUserLoginData) => {
   }
 
   const { id: userId, role, email } = userExists;
+
   const token = jwtHelpers.createToken(
-    { userId, role, email },
+    { userId, email, role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string,
   );
 
   return {
     token,
+    user: userExists,
   };
 };
 

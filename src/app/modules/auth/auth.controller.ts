@@ -21,7 +21,9 @@ const register = catchAsync(
 
 const login = catchAsync(async (req: Request, res: Response) => {
   const result = await authServices.login(req.body);
-  const { token } = result;
+
+  const { token, user } = result;
+
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,
@@ -34,7 +36,8 @@ const login = catchAsync(async (req: Request, res: Response) => {
     success: true,
     message: 'User logged in successfully!',
     payload: {
-      token: result.token,
+      token,
+      user,
     },
   });
 });
