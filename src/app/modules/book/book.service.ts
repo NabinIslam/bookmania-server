@@ -24,6 +24,7 @@ const createBook = async (req: Request) => {
     data: {
       ...req.body,
       slug: slugify(req.body.title, { lower: true }),
+      price: parseFloat(req.body.price),
       coverImage: uploadResult?.secure_url,
     },
   });
