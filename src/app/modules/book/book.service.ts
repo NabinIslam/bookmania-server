@@ -31,12 +31,47 @@ const createBook = async (req: Request) => {
   return book;
 };
 
-const getAllBooks = async (query: { genre: string; search: string }) => {
-  const { genre, search } = query;
+const getAllBooks = async (filters: {
+  genre?: string;
+  author?: string;
+  search?: string;
+}) => {
+  const { genre, author, search } = filters;
 
-  const books = await prisma.book.findMany();
-
-  if (!books) throw new ApiError(httpStatus.NOT_FOUND, 'Could not find books!');
+  const books = await prisma.book.findMany({
+    where: {
+      AND: [
+        // Filter by genre (if provided)
+        genre
+          ? {
+              genre: {
+                name: {
+                  contains: genre,
+                  mode: 'insensitive',
+                },
+              },
+            }
+          : {},
+        // Filter by author (if provided)
+        author
+          ? { author: { name: { contains: author, mode: 'insensitive' } } }
+          : {},
+        // Search by book title or description (if provided)
+        search
+          ? {
+              OR: [
+                { title: { contains: search, mode: 'insensitive' } },
+                { description: { contains: search, mode: 'insensitive' } },
+              ],
+            }
+          : {},
+      ],
+    },
+    include: {
+      author: true, // Include author details
+      genre: true, // Include genre details
+    },
+  });
 
   return books;
 };

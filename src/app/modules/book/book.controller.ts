@@ -19,7 +19,13 @@ const createBook = catchAsync(
 
 const getAllBooks = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await bookServices.getAllBooks(req.query);
+    const { genre, author, search } = req.query;
+
+    const result = await bookServices.getAllBooks({
+      genre: genre as string,
+      author: author as string,
+      search: search as string,
+    });
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -29,7 +35,6 @@ const getAllBooks = catchAsync(
     });
   },
 );
-
 export const bookControllers = {
   createBook,
   getAllBooks,
