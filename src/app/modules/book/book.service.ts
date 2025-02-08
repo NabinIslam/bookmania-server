@@ -31,13 +31,12 @@ const createBook = async (req: Request) => {
   return book;
 };
 
-const getAllBooks = async (query: { genre?: string }) => {
-  const books = await prisma.book.findMany({
-    where: query.genre ? { genre: query.genre } : undefined,
-  });
+const getAllBooks = async (query: { genre: string; search: string }) => {
+  const { genre, search } = query;
 
-  if (!books.length)
-    throw new ApiError(httpStatus.NOT_FOUND, 'Could not find books!');
+  const books = await prisma.book.findMany();
+
+  if (!books) throw new ApiError(httpStatus.NOT_FOUND, 'Could not find books!');
 
   return books;
 };
