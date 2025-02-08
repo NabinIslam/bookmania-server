@@ -17,6 +17,20 @@ const createFavorite = catchAsync(
   },
 );
 
+const getAllFavorite = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await favoriteServices.getAllFavorite(req.query);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'retrieved all Favorites successfully!',
+      payload: result,
+    });
+  },
+);
+
 export const favoriteControllers = {
   createFavorite,
+  getAllFavorite,
 };

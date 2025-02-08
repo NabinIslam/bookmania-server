@@ -27,6 +27,23 @@ const createFavorite = async (favoriteData: {
   return favorite;
 };
 
+const getAllFavorite = async (query: any) => {
+  const favorites = await prisma.favorite.findMany({
+    where: {
+      userId: query.id,
+    },
+    include: {
+      book: true,
+    },
+  });
+
+  if (!favorites)
+    throw new ApiError(httpStatus.NOT_FOUND, 'Favorite not found');
+
+  return favorites;
+};
+
 export const favoriteServices = {
   createFavorite,
+  getAllFavorite,
 };
