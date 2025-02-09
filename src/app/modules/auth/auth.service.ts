@@ -7,7 +7,7 @@ import { hashedPassword } from '../../../helpers/hashPasswordHelper';
 import { AuthUtils } from './auth.utils';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import config from '../../../config';
-import { Secret } from 'jsonwebtoken';
+import { JwtPayload, Secret } from 'jsonwebtoken';
 
 type TUserLoginData = {
   email: string;
@@ -71,11 +71,26 @@ const login = async (userLoginData: TUserLoginData) => {
 
   return {
     token,
-    user: userExists,
   };
+};
+
+const getMe = async (user: JwtPayload) => {
+  const userData = prisma.user.findFirst({
+    where: { id: user.userId },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      photo: true,
+    },
+  });
+
+  return userData;
 };
 
 export const authServices = {
   register,
   login,
+  getMe,
 };
