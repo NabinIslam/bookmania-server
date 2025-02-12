@@ -13,7 +13,7 @@
 2. **Navigate to the Project Directory:**
     
     ```bash
-    cd health-care-server
+    cd bookmania-server
     ```
     
 3. Please update the filename from `.env.example` to `.env`
